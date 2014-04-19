@@ -13,7 +13,7 @@ ATM Search
 2. Сервер – Node.JS, ExpressJS, API Альфа-Банка.
 
 ## Запуск
-1. В директории `/server` выполнить команду `npm install`, затем `node app.js`.
+1. В директории `/api` выполнить команду `npm install`, затем `node app.js`.
 2. В главной директории выполнить последовательно `npm install`, `bower install` и `grunt serve`. 
 
 При соблюдении инструкций, запустится сервер nodejs и frontend-клиент.
