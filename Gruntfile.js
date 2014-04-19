@@ -344,7 +344,7 @@ module.exports = function (grunt) {
             options: {
                 limit: 10,
                 logConcurrentOutput: true
-            }
+            },
             server: [
                 'compass:server',
                 'coffee:dist',
