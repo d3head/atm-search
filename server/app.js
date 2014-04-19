@@ -41,27 +41,6 @@ app.all('*', function(req, res, next) {
  });
 
 /* API */
-app.get('/parse', function(req, res, next) {
-	var newArr = []
-  atms = function(arr) {
-
-    for(key in arr)
-    {
-        newArr.push(arr[key]);
-    }
-	}
-
-	request(atm_json, function (error, resp, body) {
-		if (!error && res.statusCode == 200) {
-			var arr = JSON.parse(body);
-			atms(arr.response.data);
-			res.json(newArr);
-		} else {
-			res.send("Err");
-		}
-	})
-});
-
 app.get('/search/:name', function(req, res, next) {
 	var query = new RegExp( req.params[ 'name' ], "i" )
 	console.log (query);
@@ -74,22 +53,36 @@ app.get('/search/:name', function(req, res, next) {
 		}
 	}
 
-	request(atm_json, function (error, resp, body) {
-		if (!error && res.statusCode == 200) {
-			var arr = JSON.parse(replaceHtmlEntites(body));
-			atms(JSON.parse(replaceHtmlEntites(body)).response.data);
-			var results = [];
-			for (var i = 0 ; i < newArr.length ; i++)
-			{
-			    if (newArr[i]['address'].search(query) != -1 || newArr[i]['title'].search(query) != -1) {
-			        results.push(newArr[i]);
-			    }
-			}
-			res.json(results);
+	doSearch = function(body, cached) {
+		if(cached == 1) {
+			atms(JSON.parse(body).response.data);
 		} else {
-			res.send("Err");
+			atms(JSON.parse(replaceHtmlEntites(body)).response.data);
 		}
-	})
+		var results = [];
+		for (var i = 0 ; i < newArr.length ; i++)
+		{
+				if (newArr[i]['address'].search(query) != -1 || newArr[i]['title'].search(query) != -1) {
+						results.push(newArr[i]);
+				}
+		}
+		res.json(results);
+	}
+
+	if(req.query.cached == 1) {
+		fs.readFile('atm.json', function (err, body) {
+			if (err) throw err;
+			doSearch(body, 1);
+		});
+	} else {
+		request(atm_json, function (error, resp, body) {
+			if (!error && res.statusCode == 200) {
+				doSearch(body, 0);
+			} else {
+				res.send("Err");
+			}
+		})
+	}
 });
 
 var server = app.listen(3006, function() {
