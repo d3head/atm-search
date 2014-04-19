@@ -1,5 +1,5 @@
-api = "http://api.atm.dev.oleg.so/search/"
-#api = "http://127.0.0.1:3006/search/"
+#api = "http://api.atm.dev.oleg.so/search/"
+api = "http://127.0.0.1:3006/search/"
 
 $("#atm-search").selectize
 	highlight: true
