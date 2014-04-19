@@ -68,7 +68,7 @@ app.get('/search/:name', function(req, res, next) {
 		}
 	}
 
-	request('http://127.0.0.1:9000/atm.json', function (error, resp, body) {
+	request('http://atm.dev.oleg.so/atm.json', function (error, resp, body) {
 		if (!error && res.statusCode == 200) {
 			var arr = JSON.parse(replaceHtmlEntites(body));
 			atms(JSON.parse(replaceHtmlEntites(body)).response.data);
