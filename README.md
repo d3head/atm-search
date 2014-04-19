@@ -5,6 +5,7 @@ atm-search
 
 
 Для запуска необходимо наличие установленного Node.JS, npm, bower, grunt.
+Используемые технологии: Grunt, Node.JS, ExpressJS, jQuery, Selectize.JS, SASS, CoffeeScript, API Альфа-Банка.
 
 ## Запуск
 1. В директории `/server` выполнить команду `npm install`, затем `node app.js`.
