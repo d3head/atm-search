@@ -12,6 +12,10 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(cors());
 
+/* CONFIGURATION */
+var atm_json = "http://json.alfabank.ru/atm/0.1/list/?property=own&city=54";
+
+
 var replaceHtmlEntites = (function() {
   var translate_re = /&(nbsp|amp|quot|lt|gt|laquo|raquo);/g;
   var translate = {
@@ -47,7 +51,7 @@ app.get('/parse', function(req, res, next) {
     }
 	}
 
-	request('http://127.0.0.1:9000/atm.json', function (error, resp, body) {
+	request(atm_json, function (error, resp, body) {
 		if (!error && res.statusCode == 200) {
 			var arr = JSON.parse(body);
 			atms(arr.response.data);
@@ -70,7 +74,7 @@ app.get('/search/:name', function(req, res, next) {
 		}
 	}
 
-	request('http://atm.dev.oleg.so/atm.json', function (error, resp, body) {
+	request(atm_json, function (error, resp, body) {
 		if (!error && res.statusCode == 200) {
 			var arr = JSON.parse(replaceHtmlEntites(body));
 			atms(JSON.parse(replaceHtmlEntites(body)).response.data);

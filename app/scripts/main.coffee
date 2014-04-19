@@ -1,14 +1,5 @@
-replaceCurrency = (->
-  translate_re = /(rur|usd|eur)/g
-  translate =
-    rur: "рубли"
-    usd: "доллары"
-    eur: "евро"
-
-  (s) ->
-    s.replace translate_re, (match, entity) ->
-      translate[entity]
-)()
+api = "http://api.atm.dev.oleg.so/search/"
+#api = "http://127.0.0.1:3006/search/"
 
 $("#atm-search").selectize
 	highlight: true
@@ -35,7 +26,7 @@ $("#atm-search").selectize
 	onItemAdd: (value, item) ->
 	#	$("h1").text(value)
 		$.ajax
-			url: "http://api.atm.dev.oleg.so/search/" + encodeURIComponent(value)
+			url: api + encodeURIComponent(value)
 			type: "GET"
 			error: ->
 				callback()
@@ -50,7 +41,20 @@ $("#atm-search").selectize
 				else
 					is24 = "Нет"
 				$("p.around > span").text(is24)
-				currency = replaceCurrency(res[0].out.toString())
+
+				replaceCurrency = (->
+					translate_re = /(rur|usd|eur)/g
+					translate =
+						rur: "рубли"
+						usd: "доллары"
+						eur: "евро"
+
+					(s) ->
+						s.replace translate_re, (match, entity) ->
+							translate[entity]
+				)()
+
+				currency = replaceCurrency(res[0].out.toString()).replace(",", ", ")
 				$("p.currency > span").text(currency)
 				myMap = new ymaps.Map("YMapsID",
 				  center: [
@@ -80,7 +84,7 @@ $("#atm-search").selectize
 	load: (query, callback) ->
 	  return callback()  unless query.length
 	  $.ajax
-	    url: "http://api.atm.dev.oleg.so/search/" + encodeURIComponent(query)
+	    url: api + encodeURIComponent(query)
 	    type: "GET"
 	    error: ->
 	      callback()
