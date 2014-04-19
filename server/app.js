@@ -86,6 +86,6 @@ app.get('/search/:name', function(req, res, next) {
 	})
 });
 
-var server = app.listen(3000, function() {
+var server = app.listen(3006, function() {
     console.log('Listening on port %d', server.address().port);
 });
