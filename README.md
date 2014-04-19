@@ -6,6 +6,8 @@ ATM Search
 
 Для запуска необходимо наличие установленного Node.JS, npm, bower, grunt.
 
+Рабочее демо работает по адресу http://atm.dev.oleg.so
+
 ## Используемые технологии: 
 1. Клиент – Yeoman, Grunt, Bower, jQuery, Selectize.JS, SASS, CoffeeScript.
 2. Сервер – Node.JS, ExpressJS, API Альфа-Банка.
