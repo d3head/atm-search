@@ -35,7 +35,7 @@ $("#atm-search").selectize
 	onItemAdd: (value, item) ->
 	#	$("h1").text(value)
 		$.ajax
-			url: "http://127.0.0.1:3000/search/" + encodeURIComponent(value)
+			url: "http://api.atm.dev.oleg.so/search/" + encodeURIComponent(value)
 			type: "GET"
 			error: ->
 				callback()
@@ -80,7 +80,7 @@ $("#atm-search").selectize
 	load: (query, callback) ->
 	  return callback()  unless query.length
 	  $.ajax
-	    url: "http://127.0.0.1:3000/search/" + encodeURIComponent(query)
+	    url: "http://api.atm.dev.oleg.so/search/" + encodeURIComponent(query)
 	    type: "GET"
 	    error: ->
 	      callback()
