@@ -342,7 +342,7 @@ module.exports = function (grunt) {
         // Run some tasks in parallel to speed up build process
         concurrent: {
             options: {
-                limit: 10,
+                limit: 3,
                 logConcurrentOutput: true
             },
             server: [
