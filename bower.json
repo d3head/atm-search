@@ -1,0 +1,9 @@
+{
+  "name": "app",
+  "private": true,
+  "dependencies": {
+    "jquery": "~1.10.2",
+    "selectize": "~0.9.0"
+  },
+  "devDependencies": {}
+}
