@@ -1,7 +1,8 @@
 var express = require('express'),
 		app = express(),
 		request = require('request'),
-		fs = require('fs');
+		fs = require('fs'),
+		cors = require('cors');
 
 /* MIDDLEWARE */
 app.use(express.logger());
@@ -9,6 +10,7 @@ app.use(express.compress());
 app.use(express.methodOverride());
 app.use(express.json());
 app.use(express.urlencoded());
+app.use(cors());
 
 var replaceHtmlEntites = (function() {
   var translate_re = /&(nbsp|amp|quot|lt|gt|laquo|raquo);/g;
