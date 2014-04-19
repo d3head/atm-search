@@ -402,7 +402,11 @@ module.exports = function (grunt) {
     grunt.registerTask('build', [
         'clean:dist',
         'useminPrepare',
-        'concurrent:dist',
+        'coffee',
+        'compass',
+        'copy:styles',
+        'imagemin',
+        'svgmin'
         'autoprefixer',
         'concat',
         'cssmin',
